@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Atividade 28 - Números digitados </title>
+
+    <style>
+
+        *{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(30, 83, 119, 0.674);
+        }
+
+
+        input{
+            width: 50%;
+            margin: 0 auto;
+            padding: 0.5%;
+            font-size: 20px;
+            font-weight: 600;
+            outline: none;  
+            border: none;    
+            border: 2px solid black;
+            background-color: transparent;
+        }
+
+        button{
+            font-size: 18px;
+            padding: 0.5% 2%;
+            font-weight: 500;
+            background-color: rgba(30, 83, 119, 0.674);
+            border: 2px solid black;
+            margin: 1% 0;
+            color: #FFF;
+            transition: background-color 0.15s;
+            box-shadow: 1px 1px 2px black;
+            outline: none;
+            cursor: pointer;
+
+        }
+
+        p{
+            margin: 0.8%;
+        }
+
+        button:hover{
+            background-color: rgb(30, 83, 119);
+        }
+
+        #textarea{
+            width: 60%;
+            border: 2px solid black;
+            text-align: center;
+            box-shadow: 5px 5px 5px black;
+            font-size: 20px;
+            background-color: transparent;
+            outline: none;
+            min-height: 200px;
+        }
+
+        #dadosFinais{
+            border: 2px solid black;
+            box-shadow: 5px 5px 5px black;
+            font-size: 20px;
+            background-color: transparent;
+            outline: none;
+            line-height: 30px;
+            font-weight: 600;
+            font-size: 25px;
+            padding: 1%;
+            width: 30%;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h2> Adicione números de 1 a 100 </h2>
+
+    <input type="text" id="input" min="1" max="100">
+    <button id="adicionar"> ADICIONAR </button>
+
+    <div id="textarea"></div>
+
+    <button id="finalizar"> FINALIZAR </button>
+
+    <div id="dadosFinais"></div>
+
+</body>
+
+<script>
+
+    var input = []
+
+    document.querySelector('#input').addEventListener('click', limpar)
+    document.querySelector('#input').addEventListener("keyup", function(e){
+            if(e.keyCode === 13){
+                verificar()
+            }
+        });
+    document.querySelector('#adicionar').addEventListener('click', verificar)
+    document.querySelector('#finalizar').addEventListener('click', finalizar)
+
+    
+
+    function verificar(){
+
+        let valor = (Number(document.querySelector('#input').value))
+
+        for(let cont = 0; cont < input.length; cont++){
+
+            if(valor > 100){
+                alert("Insira valores de 1 a 100")
+                break
+            }
+
+            if(valor == input[cont]){
+                alert("Valor repetido!")
+                var same = 1
+                break
+            }
+
+            else if(valor == ''){
+                alert("Campo vazio")
+                break
+            }
+
+            else{
+                same = 0
+            }
+
+        }
+
+        if(same == 0){
+            adicionar()
+        }
+      
+        if(input.length == 0){
+            adicionar()
+        }
+
+    }
+
+    function adicionar(){
+            let addVetor = input.push(Number(document.querySelector('#input').value))
+            let add = Number(document.querySelector('#input').value)
+        
+            textarea.innerHTML = textarea.innerHTML + '<p>' + add + '</p>'
+
+            document.querySelector('#input').value = ''
+            document.querySelector('#input').focus()
+            
+    }
+    
+    function finalizar(){
+
+        let final = document.querySelector('#dadosFinais');
+        let maior = Math.max.apply(null, input);
+        let menor = Math.min.apply(null, input);
+        let soma = 0;
+
+        for(let cont = 0; cont < input.length; cont++){
+            soma = soma + input[cont]
+        }
+
+        if(input.length == 0){
+            alert("Você precisa adicionar pelo menos um valor")
+        }
+
+        final.innerHTML = `Números inseridos: ${input.length} <br>
+                           Maior valor: ${maior} <br>
+                           Menor valor: ${menor} <br>
+                           Soma: ${soma} <br>
+                           Média: ${soma / input.length}`
+    }
+    
+    function limpar(){
+        document.querySelector('#input').value = ''
+    }
+
+</script>
+
+</html>
