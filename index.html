@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Contador </title>
+
+    <style>
+
+        *{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input{
+            width: 30%;
+            font-size: 20px;
+            padding: 0.5%;
+        }
+
+        button{
+            padding: 1%;
+            background-color: gray;
+            color: #000;
+            border: 2px solid black;
+            margin: 2%;
+            cursor: pointer;
+        }
+
+        #result{
+            border: 2px solid black;
+            padding: 2%;
+            background-color: gray;
+        }
+    </style>
+
+</head>
+<body>
+    <h1> CONTADOR </h1>
+
+    <h2> Início </h2>
+    <input type="text" id="inicio">
+
+    <h2> Fim </h2>
+    <input type="text" id="fim">
+
+    <h2> Passo </h2>
+    <input type="text" id="passo">
+
+    <button id="contar"> CONTAR </button>
+    <button id="apagar"> APAGAR </button>
+
+    <div id="result">
+
+    </div>
+
+</body>
+
+<script>
+
+    document.querySelector('#contar').addEventListener('click', contar)
+    document.querySelector('#apagar').addEventListener('click', apagar)
+
+    function contar (){
+
+        let inicio = Number(document.querySelector('#inicio').value)
+        let fim = Number(document.querySelector('#fim').value)
+        let passo = Number(document.querySelector('#passo').value)
+        let result = document.querySelector('#result')
+
+        let cont = inicio;
+
+        if(inicio > fim){
+            for(cont = inicio; cont >= fim; cont-=passo){
+                console.log(cont)
+                result.innerHTML += ' - ' + cont 
+            }
+        }
+        else{
+            for(cont = inicio; cont <= fim; cont+=passo){
+                console.log(cont)
+                result.innerHTML += ' - ' + cont 
+            }
+        }
+    }
+    
+    function apagar(){
+        let result = document.querySelector('#result').innerHTML = ''
+
+    }
+</script>
+
+</html>
